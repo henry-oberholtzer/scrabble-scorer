@@ -1,8 +1,13 @@
 namespace ScrabbleScorer.Models;
 
 [TestClass]
-public class WordTest
+public class WordTest : IDisposable
 {
+    public void Dispose()
+    {
+        Word.ClearAll();
+    }
+
     [TestMethod]
     public void WordConstruct_CreatesInstaceOfWord_Word()
     {
@@ -26,5 +31,23 @@ public class WordTest
         string camembert = "camembert";
         newWord.Played = camembert;
         Assert.AreEqual(camembert, newWord.Played);
+    }
+
+    [TestMethod]
+    public void WordConstruct_ClearAll_Void()
+    {
+        List<Word> expected = [];
+        Word.ClearAll();
+        CollectionAssert.AreEqual(expected, Word.GetAll());
+    }
+
+    [TestMethod]
+    public void WordConstruct_GetAll_Void()
+    {
+        Word cheddar = new Word("cheddar");
+        Word swiss = new Word("swiss");
+        Word parmesan = new Word("parmigiano reggiano");
+        List<Word> expected = new List<Word> { cheddar, swiss, parmesan };
+        CollectionAssert.AreEqual(expected, Word.GetAll());
     }
 }
