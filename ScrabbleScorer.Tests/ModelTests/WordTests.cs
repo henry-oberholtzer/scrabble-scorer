@@ -17,4 +17,14 @@ public class WordTest
         Word newWord = new(gorg);
         Assert.AreEqual(gorg, newWord.Played);
     }
+
+    [TestMethod]
+    public void WordConstruct_SetWord_void()
+    {
+        string brie = "brie";
+        Word newWord = new(brie);
+        string camembert = "camembert";
+        newWord.Played = camembert;
+        Assert.AreEqual(camembert, newWord.Played);
+    }
 }
